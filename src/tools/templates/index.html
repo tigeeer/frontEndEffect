@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <link href="../assets/css/tools.css" rel="stylesheet" />
+    <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <script src="../assets/js/tools.js"></script>
+</head>
+<body>
+    <button class="btn" onclick="showToast()">show toast</button>
+    <button class="btn" onclick="showLoading()">show loading</button>
+
+    <script>
+        function showToast() {
+            Tools.toast.success('Hello World!');
+        }
+
+        function showLoading() {
+            Tools.loading.show();
+        }
+    </script>
+</body>
+</html>
