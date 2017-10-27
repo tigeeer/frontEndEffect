@@ -10,16 +10,23 @@
     <script src="../assets/js/tools.js"></script>
 </head>
 <body>
+    <div class="w-100" style="height: 500px; background-color: pink;" onclick="alert('hello')"></div>
+
     <button class="btn" onclick="showToast()">show toast</button>
     <button class="btn" onclick="showLoading()">show loading</button>
 
     <script>
         function showToast() {
-            Tools.toast.success('Hello World!');
+            Tools.toast.error('Hello World!');
         }
 
         function showLoading() {
+            Tools.loading.backdrop = false;
             Tools.loading.show();
+
+            setTimeout(function () {
+                Tools.loading.remove();
+            },3000)
         }
     </script>
 </body>

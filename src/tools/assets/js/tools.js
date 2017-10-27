@@ -23,19 +23,27 @@ let Tools;
             return this.container;
         },
         success: function (text) {
+            this.createToast(text, 'toast toast-success', 4000);
+        },
+        error: function (text) {
+            this.createToast(text, 'toast toast-error', 4000 )
+        },
+        createToast: function (text, nodeClass, duration) {
             let toastNode = document.createElement('div');
             let textNode = document.createTextNode(text);
             toastNode.appendChild(textNode);
-            toastNode.setAttribute('class', 'toast');
+            toastNode.setAttribute('class', nodeClass);
             let container = this.getContainer();
             container.appendChild(toastNode);
             setTimeout(function() {
                 container.removeChild(toastNode);
-            }, 4000);
+            }, duration);
         }
     };
 }, function () {
     return {
+        container: null,
+        backdrop: true,
         show: function () {
             let container = document.createElement('div');
             container.setAttribute('class', 'loading-container');
@@ -45,14 +53,23 @@ let Tools;
             icon.setAttribute('class', 'fa fa-circle-o-notch fa-spin fa-3x fa-fw');
             loading.appendChild(icon);
             container.appendChild(loading);
+            this.container = container;
             let body = document.getElementsByTagName('body')[0];
             body.appendChild(container);
             loading.addEventListener('click', function (e) {
                 e.stopPropagation()
             });
             container.addEventListener('click', function () {
-                body.removeChild(this);
-            });
+                if (this.backdrop) {
+                    this.remove();
+                }
+            }.bind(this));
+        },
+        remove: function () {
+            if (this.container) {
+                this.container.remove();
+                this.container = null;
+            }
         }
     }
 }));
